@@ -6,7 +6,6 @@ import CardForm from './components/CardForm'
 function App() {
   return (
     <div>
-
         <CardForm card-id="456"/>
     </div>
     

@@ -19,3 +19,10 @@ def add_card(user_id, title, content, tags):
     })
     return insert_result.inserted_id
 
+def find_card_by_tag(user_id, tag):
+    conn = create_connection
+    cards = conn[DATABASE_NAME]["cards"].find({
+        "user_id":user_id,
+        "tags":tag
+    })
+    return cards

@@ -25,8 +25,20 @@ def get_current_user():
 @app.route('/add-card', methods=["POST"])
 def add_card():
     current_user = get_current_user()
-    newly_inserted_id = data.add_card(current_user['user_id'],request.json.get('title'), request.json.get('content'),request.json.get('tags'))
-    return Response(dumps({'status':'ok', 'new_card_id':newly_inserted_id}), status=200, mimetype='application/json')
+    newly_inserted_id = data.add_card(current_user['user_id'],
+                                      request.json.get('title'),
+                                      request.json.get('content'),
+                                      request.json.get('tags'))
+
+    return Response(dumps({'status':'ok', 'new_card_id':newly_inserted_id}), status=200, mimetype='application/json') 
+
+
+@app.route('/cards/tag/<tag>')
+def find_card_by_tag(tag):
+    current_user = get_current_user()
+    cards = data.find_card_by_tag(current_user['user_id'], tag)
+    return dumps(cards)
+
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
